@@ -95,6 +95,7 @@
         QUIET,
         SILENT,
         ASSEMBLE,
+        DEBUG,
         CLEAN,
         LOG,
         PROJECT,
@@ -116,9 +117,13 @@
 
     int8_t isassemble (void);
 
+    int8_t isdebug (void);
+
     int8_t checkflags (char *f);
 
     void setassemble (void);
+
+    void setdebug (void);
 
     void setclean (void);
 

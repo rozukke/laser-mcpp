@@ -44,6 +44,7 @@ int main (int argc, char **argv)
     */
     for (; *argv &&
             flag != ASSEMBLE &&
+            flag != DEBUG &&
             flag != PROJECT &&
             flag != CLEAN &&
             flag != -1;
@@ -66,6 +67,10 @@ int main (int argc, char **argv)
         break;
         case ASSEMBLE:
         setassemble ();				// flag.c
+        break;
+        case DEBUG:
+        printf("ENABLED DEBUG MODE\n");
+        setdebug();
         break;
         case CLEAN:
         setclean ();				// flag.c
@@ -110,7 +115,7 @@ int main (int argc, char **argv)
         } else {
             jobs = 0;
         }
-    } else if (isassemble ()) {
+    } else if (isassemble () || isdebug()) {
         for (; *argv; argv++) {
             if (checkextension (*argv, ".asm")) {
                 failed += assemble (*argv);

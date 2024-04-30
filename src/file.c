@@ -63,43 +63,46 @@ void replaceextension (char *file, const char *extension)
 uint8_t openasmfiles (filearr_t *f, char *file)
 {
     uint8_t failed = 0;
+    
     f->fp = fopen (file, "r");
     if (f->fp == NULL) {
         notify ("Unable to open %s!\n", file);
         failed++;
     }
-    replaceextension (file, ".sym");
     
-    f->sym = fopen (file, "w");
-    if (f->sym == NULL) {
-        notify ("Unable to open %s!\n", file);
-        failed++;
-    }
-    replaceextension (file, ".bin");
+    if (isdebug()) {
+        replaceextension (file, ".sym");
+        f->sym = fopen (file, "w");
+        if (f->sym == NULL) {
+            notify ("Unable to open %s!\n", file);
+            failed++;
+        }
+        
+        replaceextension (file, ".bin");
+        f->bin = fopen (file, "w");
+        if (f->bin == NULL) {
+            notify ("Unable to open %s!\n", file);
+            failed++;
+        }
 
-    f->bin = fopen (file, "w");
-    if (f->bin == NULL) {
-        notify ("Unable to open %s!\n", file);
-        failed++;
+        replaceextension (file, ".hex");
+        f->hex = fopen (file, "wb");
+        if (f->hex == NULL) {
+            notify ("Unable to open %s!\n", file);
+            failed++;
+        }
+        
+        replaceextension (file, ".lst");
+        f->lst = fopen (file, "w");
+        if (f->lst == NULL) {
+            notify ("Unable to open %s!\n", file);
+            failed++;
+        }
     }
-    replaceextension (file, ".hex");
 
-    f->hex = fopen (file, "w");
-    if (f->hex == NULL) {
-        notify ("Unable to open %s!\n", file);
-        failed++;
-    }
     replaceextension (file, ".obj");
-
-    f->obj = fopen (file, "wb");
+    f->obj = fopen (file, "w");
     if (f->obj == NULL) {
-        notify ("Unable to open %s!\n", file);
-        failed++;
-    }
-    replaceextension (file, ".lst");
-
-    f->lst = fopen (file, "w");
-    if (f->lst == NULL) {
         notify ("Unable to open %s!\n", file);
         failed++;
     }
@@ -135,12 +138,16 @@ int8_t clean (char *file)
 
 void closeasmfiles (filearr_t *f)
 {
-    if (f->fp != NULL) fclose (f->fp);
-    if (f->sym != NULL) fclose (f->sym);
-    if (f->bin != NULL) fclose (f->bin);
-    if (f->hex != NULL) fclose (f->hex);
+    if (isdebug()) {
+        if (f->fp != NULL) fclose (f->fp);
+        if (f->sym != NULL) fclose (f->sym);
+        if (f->bin != NULL) fclose (f->bin);
+        if (f->hex != NULL) fclose (f->hex);
+        if (f->lst != NULL) fclose (f->lst);
+    }
+    
     if (f->obj != NULL) fclose (f->obj);
-    if (f->lst != NULL) fclose (f->lst);
+    
 }
 
 #define DEFAULT_FILEBUF_SIZE 256
