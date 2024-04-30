@@ -23,19 +23,6 @@ differences, but Laser has practically 0 dependencies so it should be fine),
 copy the file to either `/usr/bin` or `/usr/local/bin` and make it executable. 
 Alternatively, put it wherever and add it to your PATH environment variable.
 
-### Windows
-
-Download the `laser-x-x-x.exe` from the releases tab and place it somewhere 
-permanent (I.E. not your Downloads folder), and add it to your Windows PATH.
-
-To add the program to your PATH, open the file explorer, right click on This PC,
-and select 'properties'. Then, click on 'advanced system settings' and click on 
-the 'environment variables' button. In the window that pops up, highlight the 
-'Path' variable and select 'edit'. From there, click 'new' and input the file 
-path of where you placed the downloaded laser executable. Afterwards, click 
-'ok' and then 'apply'. You should then be able to invoke laser from the command 
-line.
-
 ## Usage
 
 See [USAGE.md](USAGE.md)
