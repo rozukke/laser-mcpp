@@ -100,13 +100,13 @@
         PROJECT,
     };
 
-    const char *about;
+    extern const char *about;
 
-    const char *version_num;
+    extern const char *version_num;
 
-    const char *usage;
+    extern const char *usage;
 
-    const char *help;
+    extern const char *help;
 
     int8_t isclean (void);
 
