@@ -621,11 +621,14 @@ int8_t assemble (char *file)
 
     // write buffers to file
     writeobj (arrs.filebuf, f.obj);
-    writehex (arrs.filebuf, f.hex);
-    writebin (arrs.filebuf, f.bin);
-    writesym (arrs.label, f.sym);
-    writelst (arrs.filebuf, f.fp, f.lst);
-
+    // only write debug files when specified rather than by default
+    if(isdebug()) {
+        writehex (arrs.filebuf, f.hex);
+        writebin (arrs.filebuf, f.bin);
+        writesym (arrs.label, f.sym);
+        writelst (arrs.filebuf, f.fp, f.lst);
+    }
+    
     freefilebuf (arrs.filebuf);
     freealiasarr (arrs.alias);
     freemacroarr (arrs.macro);
