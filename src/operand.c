@@ -87,16 +87,25 @@ int8_t istrap (Token *token)
         {"PUTSP", "putsp"},
         {"HALT", "halt"},
         {"TRAP", "trap"},
-        {"REG", "reg"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
+        {"AAAAAAAA", "aaaaaaaa"},
         {"CHAT", "chat"},
         {"GETP", "getp"},
         {"SETP", "setp"},
         {"GETB", "getb"},
         {"SETB", "setb"},
-        {"GETH", "geth"}
+        {"GETH", "geth"},
+        {"REG", "reg"},
     };
 
-    int8_t tmp = arrcmp (token->str, traps, 14);
+    int8_t tmp = arrcmp (token->str, traps, 23);
     if (tmp == -1) return -1;
     else if (tmp == 6) return 0;
     else return 32 + tmp;
