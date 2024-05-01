@@ -28,7 +28,7 @@ clean:
 	rm -f $(ODIR)/*.o && rm -f laser
 
 install:
-	cp laser /usr/local/bin
+	cp laser /usr/local/bin/
 
 uninstall:
 	rm -f /usr/local/bin/laser
