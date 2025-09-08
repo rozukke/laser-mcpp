@@ -457,7 +457,7 @@ uint8_t passtwo (uint32_t tbufind, uint16_t *addr, arrs_t *arrs)
 
                 if (offt > 0) {
                     trapvect8 = offset (offt, token[1]);
-                    if (trapvect8 > 0x25 || trapvect8 < 0x20) {
+                    if (trapvect8 > 0x2d || trapvect8 == 0x26 || trapvect8 < 0x20) {
                         warning (ln, "'%s' is not a predefined trap routine",
                                 token[1]->str);
                     }
