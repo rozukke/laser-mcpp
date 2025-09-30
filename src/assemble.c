@@ -91,7 +91,7 @@ uint16_t preorig (filearr_t f, uint32_t *ln, arrs_t *arrs)
                 warning (i, "'%s' is only used in project mode", token[0]->str);
             break;
         default:
-            warning (i, "Ignoring invalid token '%s' before '.ORIG'",
+            error (i, "Invalid token '%s' before '.ORIG'",
                     token[0]->str);
             break;
         }
