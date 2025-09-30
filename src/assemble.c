@@ -238,7 +238,7 @@ uint8_t passone (uint32_t ln, uint16_t *addr, TokenBuffer *buf, arrs_t *arrs)
     if (opnum == -1) {
         
     } else if (opcount > opnum) {
-        warning (ln, "'%s' expects %d operands", tok, opnum);
+        error (ln, "'%s' expects %d operands", tok, opnum);
     } else if (opcount < opnum) {
         error (ln,	"'%s' expects %d operands", tok, opnum);
     }
