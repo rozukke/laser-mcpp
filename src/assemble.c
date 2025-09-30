@@ -216,7 +216,7 @@ uint8_t passone (uint32_t ln, uint16_t *addr, TokenBuffer *buf, arrs_t *arrs)
             } else if (pop == FILL) {
                 *addr += 1;
             } else {
-                warning (ln, "Ignoring unexpected use of '%s' in program body",
+                error (ln, "Unexpected use of '%s' in program body",
                         token[j]->str);
             }
         } else if (isregister (token[j]) >= 0) {
@@ -526,7 +526,7 @@ uint8_t passtwo (uint32_t tbufind, uint16_t *addr, arrs_t *arrs)
         case IMPORT:
             if (isproject ()) break;
         default:
-            warning (ln, "Ignoring unexpected use of '%s' in program body",
+            error (ln, "Unexpected use of '%s' in program body",
                     token[0]->str);
             break;
         }
