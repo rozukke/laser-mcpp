@@ -672,8 +672,8 @@ void generateshared (labelarr_t* share, pnode_t *node)
     lineinfo_t **tmp = node->res.tokbufarr->arr;
     for (uint32_t i = 0; end; --end, ++i) {
         Token **tbuf = tmp[i]->buf->token;
-        if (strcmp(tbuf[0]->str, ".EXPORT") == 0 ||
-            strcmp(tbuf[0]->str, ".export") == 0)
+        if (strcasecmp(tbuf[0]->str, ".EXPORT") == 0 ||
+            strcasecmp(tbuf[0]->str, ".export") == 0)
         {
             uint32_t ln = tmp[i]->ln;
             if (tmp[i]->buf->toknum < 2) {
@@ -707,8 +707,8 @@ void extendprivate (labelarr_t* share, pnode_t *node)
     lineinfo_t **tmp = node->res.tokbufarr->arr;
     for (uint32_t i = 0; end; --end, ++i) {
         Token **tbuf = tmp[i]->buf->token;
-        if (strcmp(tbuf[0]->str, ".IMPORT") == 0 ||
-            strcmp(tbuf[0]->str, ".import") == 0)
+        if (strcasecmp(tbuf[0]->str, ".IMPORT") == 0 ||
+            strcasecmp(tbuf[0]->str, ".import") == 0)
         {
             uint32_t ln = tmp[i]->ln;
             if (tmp[i]->buf->toknum < 2) {
