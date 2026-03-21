@@ -27,8 +27,8 @@
 int8_t arrcmp (char *str, const char *arr[][2], uint8_t size)
 {
     for (uint8_t i = 0; i < size; i++) {
-        if (strcmp (str, arr[i][0]) == 0 ||
-            strcmp (str, arr[i][1]) == 0) return i;
+        if (strcasecmp (str, arr[i][0]) == 0 ||
+            strcasecmp (str, arr[i][1]) == 0) return i;
     }
     return -1;
 }
@@ -36,9 +36,9 @@ int8_t arrcmp (char *str, const char *arr[][2], uint8_t size)
 int8_t brrcmp (char *str, const char *arr[][3], uint8_t size)
 {
     for (uint8_t i = 0; i < size; i++) {
-        if (strcmp (str, arr[i][0]) == 0 ||
-            strcmp (str, arr[i][1]) == 0 ||
-            strcmp (str, arr[i][2]) == 0) return i;
+        if (strcasecmp (str, arr[i][0]) == 0 ||
+            strcasecmp (str, arr[i][1]) == 0 ||
+            strcasecmp (str, arr[i][2]) == 0) return i;
     }
     return -1;
 }
@@ -129,11 +129,11 @@ int8_t isoperand (Token *token)
             op = BR;
         } else if (istrap (token) >= 0) {
             op = TRAPS;
-        } else if (strcmp (token->str, "JSRR") == 0 ||
-                   strcmp (token->str, "jsrr") == 0) {
+        } else if (strcasecmp (token->str, "JSRR") == 0 ||
+                   strcasecmp (token->str, "jsrr") == 0) {
             op = JSRR;
-        } else if (strcmp (token->str, "RET") == 0 ||
-                   strcmp (token->str, "ret") == 0) {
+        } else if (strcasecmp (token->str, "RET") == 0 ||
+                   strcasecmp (token->str, "ret") == 0) {
             op = RET;
         }
     } else if (op == 13) {														// invalid op

@@ -48,7 +48,7 @@ void addalias (aliasarr_t *a, uint32_t ln, Token *word, Token *reg)
 int32_t findalias (aliasarr_t *a, Token *word)
 {
     for (uint16_t i = 0; i < a->ind; i++) {
-        if (strcmp (word->str, a->arr[i].word->str) == 0) {
+        if (strcasecmp (word->str, a->arr[i].word->str) == 0) {
             return i;
         }
     }
