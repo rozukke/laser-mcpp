@@ -91,7 +91,7 @@ uint16_t preorig (filearr_t f, uint32_t *ln, arrs_t *arrs)
                 warning (i, "'%s' is only used in project mode", token[0]->str);
             break;
         default:
-            warning (i, "Ignoring invalid token '%s' before '.ORIG'",
+            error (i, "Invalid token '%s' before '.ORIG'",
                     token[0]->str);
             break;
         }
@@ -216,7 +216,7 @@ uint8_t passone (uint32_t ln, uint16_t *addr, TokenBuffer *buf, arrs_t *arrs)
             } else if (pop == FILL) {
                 *addr += 1;
             } else {
-                warning (ln, "Ignoring unexpected use of '%s' in program body",
+                error (ln, "Unexpected use of '%s' in program body",
                         token[j]->str);
             }
         } else if (isregister (token[j]) >= 0) {
@@ -238,7 +238,7 @@ uint8_t passone (uint32_t ln, uint16_t *addr, TokenBuffer *buf, arrs_t *arrs)
     if (opnum == -1) {
         
     } else if (opcount > opnum) {
-        warning (ln, "'%s' expects %d operands", tok, opnum);
+        error (ln, "'%s' expects %d operands", tok, opnum);
     } else if (opcount < opnum) {
         error (ln,	"'%s' expects %d operands", tok, opnum);
     }
@@ -526,7 +526,7 @@ uint8_t passtwo (uint32_t tbufind, uint16_t *addr, arrs_t *arrs)
         case IMPORT:
             if (isproject ()) break;
         default:
-            warning (ln, "Ignoring unexpected use of '%s' in program body",
+            error (ln, "Unexpected use of '%s' in program body",
                     token[0]->str);
             break;
         }
