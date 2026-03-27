@@ -24,36 +24,33 @@
 #define USES_OPERAND
 #include "laser.h"
 
-int8_t arrcmp (char *str, const char *arr[][2], uint8_t size)
+int8_t arrcmp (char *str, const char *arr[], uint8_t size)
 {
     for (uint8_t i = 0; i < size; i++) {
-        if (strcmp (str, arr[i][0]) == 0 ||
-            strcmp (str, arr[i][1]) == 0) return i;
+        if (strcasecmp (str, arr[i]) == 0) return i;
     }
     return -1;
 }
 
-int8_t brrcmp (char *str, const char *arr[][3], uint8_t size)
+int8_t brrcmp (char *str, const char *arr[], uint8_t size)
 {
     for (uint8_t i = 0; i < size; i++) {
-        if (strcmp (str, arr[i][0]) == 0 ||
-            strcmp (str, arr[i][1]) == 0 ||
-            strcmp (str, arr[i][2]) == 0) return i;
+        if (strcasecmp (str, arr[i]) == 0) return i;
     }
     return -1;
 }
 
 int8_t isregister (Token *token)
 {
-    const char *regs[][2] = {
-        {"R0", "r0"},
-        {"R1", "r1"},
-        {"R2", "r2"},
-        {"R3", "r3"},
-        {"R4", "r4"},
-        {"R5", "r5"},
-        {"R6", "r6"},
-        {"R7", "r7"}
+    const char *regs[] = {
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
     };
 
     return arrcmp (token->str, regs, 8);
@@ -61,15 +58,15 @@ int8_t isregister (Token *token)
 
 int8_t isbranch (Token *token)
 {
-    const char *brs[][3] = {
-        {"BR", "BR", "br"},
-        {"BRP", "BRp", "brp"},
-        {"BRZ", "BRz", "brz"},
-        {"BRZP", "BRzp", "brzp"},
-        {"BRN", "BRn", "brn"},
-        {"BRNP", "BRnp", "brnp"},
-        {"BRNZ", "BRnz", "brnz"},
-        {"BRNZP", "BRnzp", "brnzp"}
+    const char *brs[] = {
+        "BR",
+        "BRP",
+        "BRZ",
+        "BRZP",
+        "BRN",
+        "BRNP",
+        "BRNZ",
+        "BRNZP",
     };
 
     int8_t tmp = brrcmp (token->str, brs, 8);
@@ -79,21 +76,21 @@ int8_t isbranch (Token *token)
 
 int8_t istrap (Token *token)
 {
-    const char *traps[][2] = {
-        {"GETC", "getc"},
-        {"OUT", "out"},
-        {"PUTS", "puts"},
-        {"IN", "in"},
-        {"PUTSP", "putsp"},
-        {"HALT", "halt"},
-        {"TRAP", "trap"},
-        {"REG", "reg"},
-        {"CHAT", "chat"},
-        {"GETP", "getp"},
-        {"SETP", "setp"},
-        {"GETB", "getb"},
-        {"SETB", "setb"},
-        {"GETH", "geth"}
+    const char *traps[] = {
+        "GETC",
+        "OUT",
+        "PUTS",
+        "IN",
+        "PUTSP",
+        "HALT",
+        "TRAP",
+        "REG",
+        "CHAT",
+        "GETP",
+        "SETP",
+        "GETB",
+        "SETB",
+        "GETH",
     };
 
     int8_t tmp = arrcmp (token->str, traps, 14);
@@ -104,23 +101,23 @@ int8_t istrap (Token *token)
 
 int8_t isoperand (Token *token)
 {
-    const char *ops[][2] = {
-        {"BR", "br"},
-        {"ADD", "add"},
-        {"LD", "ld"},
-        {"ST", "st"},
-        {"JSR", "jsr"},
-        {"AND", "and"},
-        {"LDR", "ldr"},
-        {"STR", "str"},
-        {"RTI", "rti"},
-        {"NOT", "not"},
-        {"LDI", "ldi"},
-        {"STI", "sti"},
-        {"JMP", "jmp"},
-        {"", ""},
-        {"LEA", "lea"},
-        {"TRAP", "trap"}
+    const char *ops[] = {
+        "BR",
+        "ADD",
+        "LD",
+        "ST",
+        "JSR",
+        "AND",
+        "LDR",
+        "STR",
+        "RTI",
+        "NOT",
+        "LDI",
+        "STI",
+        "JMP",
+        "",
+        "LEA",
+        "TRAP",
     };
 
     int8_t op = arrcmp (token->str, ops, 16);
@@ -129,11 +126,11 @@ int8_t isoperand (Token *token)
             op = BR;
         } else if (istrap (token) >= 0) {
             op = TRAPS;
-        } else if (strcmp (token->str, "JSRR") == 0 ||
-                   strcmp (token->str, "jsrr") == 0) {
+        } else if (strcasecmp (token->str, "JSRR") == 0 ||
+                   strcasecmp (token->str, "jsrr") == 0) {
             op = JSRR;
-        } else if (strcmp (token->str, "RET") == 0 ||
-                   strcmp (token->str, "ret") == 0) {
+        } else if (strcasecmp (token->str, "RET") == 0 ||
+                   strcasecmp (token->str, "ret") == 0) {
             op = RET;
         }
     } else if (op == 13) {														// invalid op

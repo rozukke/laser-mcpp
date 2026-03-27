@@ -25,20 +25,20 @@
 #define USES_OFFSET
 #include "laser.h"
 
-int8_t arrcmp (char *str, const char *arr[][2], uint8_t size);
+int8_t arrcmp (char *str, const char *arr[], uint8_t size);
 
 int8_t ispseudoop (Token *token)
 {
-    const char *pops[][2] = {
-        ".ALIAS", ".alias",		// 0
-        ".MACRO", ".macro",		// 1
-        ".ORIG", ".orig",		// 2
-        ".END", ".end",			// 3
-        ".STRINGZ", ".stringz",	// 4
-        ".BLKW", ".blkw",		// 5
-        ".FILL", ".fill",		// 6
-        ".EXPORT", ".export",	// 7
-        ".IMPORT", ".import"	// 8
+    const char *pops[] = {
+        ".ALIAS",	// 0
+        ".MACRO",	// 1
+        ".ORIG",	// 2
+        ".END",		// 3
+        ".STRINGZ",	// 4
+        ".BLKW",	// 5
+        ".FILL",	// 6
+        ".EXPORT",	// 7
+        ".IMPORT"	// 8
     };
     return arrcmp (token->str, pops, 9);
 }
